@@ -1,0 +1,190 @@
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="Handy Whisper RU Coding Agent: локальная Q8_0-модель для русской диктовки coding-задач">
+</p>
+
+<p align="center">
+  <code>GGML</code> · <code>Q8_0</code> · <code>ru</code> · <code>Whisper Large V3 Turbo</code> · <code>833.69 MiB</code>
+</p>
+
+<p align="center">
+  <a href="https://github.com/kalpakprod/handy-whisper-large-v3-turbo-ru-coding-agent/releases/latest/download/handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin"><strong>Скачать модель</strong></a>
+  ·
+  <a href="#установка-в-handy">Установить в Handy</a>
+  ·
+  <a href="./evaluation.json">Машинные метрики</a>
+</p>
+
+## Что это
+
+Специализированная локальная модель для русской диктовки заданий coding-агентам. Она обучена сохранять то, что обычная ASR чаще всего портит: латинские инструменты, CLI-флаги, пути, имена файлов, ветки, идентификаторы и отрицания.
+
+```text
+«сначала запусти пайтест минус ку»
+→ «Сначала запусти pytest -q.»
+
+«открой эс ар си слэш эй пи ай точка пи уай»
+→ «Открой src/api.py.»
+
+«не делай гит ресет хард»
+→ «Не делай git reset --hard.»
+```
+
+Релиз содержит один готовый файл для движка `whisper.cpp`, который использует Handy. Python, PEFT и отдельная LoRA-папка для запуска не нужны.
+
+## Установка в Handy
+
+### Автоматически через PowerShell
+
+```powershell
+$modelDir = Join-Path $env:APPDATA "com.pais.handy\models"
+$modelName = "handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin"
+$modelPath = Join-Path $modelDir $modelName
+$url = "https://github.com/kalpakprod/handy-whisper-large-v3-turbo-ru-coding-agent/releases/latest/download/$modelName"
+
+New-Item -ItemType Directory -Force -Path $modelDir | Out-Null
+Invoke-WebRequest -Uri $url -OutFile $modelPath
+(Get-FileHash -Algorithm SHA256 $modelPath).Hash
+```
+
+Ожидаемый SHA-256:
+
+```text
+BCEB46FC11068BA5BAD0ED85AFDCC92E5639704D04F5238C2D43DB20DDF90A96
+```
+
+Перезапустите Handy и выберите модель `handy-whisper-large-v3-turbo-ru-coding-agent-q8_0`.
+
+### Вручную
+
+1. Скачайте `.bin` из [последнего релиза](https://github.com/kalpakprod/handy-whisper-large-v3-turbo-ru-coding-agent/releases/latest).
+2. Положите файл в `%APPDATA%\com.pais.handy\models\`.
+3. Перезапустите Handy и выберите модель по имени файла.
+
+## Результаты
+
+### Главный domain test
+
+300 независимых русских coding-команд, 0.421 часа аудио. Ниже WER лучше, остальные метрики выше лучше.
+
+| Вариант | WER ↓ | Word exact ↑ | Surface exact ↑ | Critical exact ↑ | Negation exact ↑ | False canonicalization ↓ | Punctuation macro-F1 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Базовая модель | 45.51% | — | — | 2.78% | 100% | 0% | 0.0471 |
+| Предыдущий LoRA R32 | 33.56% | — | — | 59.72% | 100% | 0% | 0.0698 |
+| Выбранный R48, только модель | **8.35%** | 65.33% | 53.33% | **60.42%** | **100%** | **0%** | 0.4172 |
+| R48 + внешний spoken formatter | **6.29%** | **67.67%** | **53.33%** | **60.42%** | **100%** | **0%** | **0.6468** |
+
+`spoken formatter` был отдельным детерминированным постпроцессором для явно произнесённых слов `точка`, `запятая`, `новая строка` и подобных команд. Он не встроен в `.bin`, поэтому для обычного Handy-режима ориентир модели до квантования: **WER 8.35%**.
+
+### Проверка Q8_0 против F16
+
+Одинаковые 40 отложенных клипов: 20 domain и 20 multi-voice hard-set.
+
+| Метрика | F16 | Q8_0 | Разница |
+|---|---:|---:|---:|
+| WER относительно эталона | 33.33% | **33.33%** | **0.00 п.п.** |
+| Punctuation macro-F1 | 0.532948 | 0.532924 | −0.000024 |
+
+Нормализованный текст F16 и Q8_0 полностью совпал на 67.5% клипов, исходная строка — на 65%. Между двумя выводами есть локальные различия, но на этой выборке Q8_0 не изменил итоговый WER. Выборка небольшая, поэтому это parity smoke-test, а не доказательство нулевой потери на любой речи.
+
+### Внешние русские наборы
+
+| Набор | Base WER | R48 WER | Итог |
+|---|---:|---:|---|
+| FLEURS RU, 237 | 7.87% | **5.91%** | улучшение |
+| Common Voice RU, 687 | **3.73%** | 4.03% | небольшая регрессия |
+| Speech-MASSIVE RU, 1 810 | **17.22%** | 17.93% | небольшая регрессия |
+| RuLibriSpeech, 380 | **11.79%** | 12.70% | небольшая регрессия |
+
+Модель специализирована под coding-диктовку. Она не заявлена как безусловно лучший универсальный русский ASR.
+
+## История дообучения
+
+### 1. Базовая русская Whisper
+
+Стартовая точка — [`coriollon/whisper-large-v3-turbo-russian`](https://huggingface.co/coriollon/whisper-large-v3-turbo-russian). На domain test база давала WER 45.51% и сохраняла критические технические фрагменты только в 2.78% целевых строк.
+
+### 2. Первый LoRA R32
+
+Первый адаптер доказал, что доменная настройка работает: critical exact вырос до 59.72%. Но WER 33.56% и punctuation macro-F1 0.0698 оставались недостаточными. Этот этап стал прототипом, а не релизом.
+
+### 3. Расширение корпуса
+
+Финальный train собран из публичной русской речи и синтетического coding replay:
+
+| Источник | Примеров | Часов | Роль |
+|---|---:|---:|---|
+| YO-CPT-ru | 1 950 | 6.338 | естественная русская речь с пунктуацией |
+| Common Voice 21 RU | 4 024 | 6.001 | разные голоса и акустические условия |
+| RuLibriSpeech | 3 367 | 6.003 | длинная связная речь |
+| FLEURS RU | 965 | 3.002 | чистый многоязычный контроль |
+| Format TTS | 800 | 1.136 | знаки, строки, абзацы, кавычки |
+| Coding replay | 240 | 0.274 | команды, пути, инструменты, отрицания |
+
+Итого: **11 346 train-примеров / 22.754 часа** и **926 dev-примеров / 1.852 часа**. Личный голос владельца не использовался ни в train, ни в dev/test, ни в smoke-тестах.
+
+### 4. LoRA R48 и выбор эпохи
+
+- rank `48`, alpha `96`, dropout `0.05`;
+- target modules: `q_proj`, `k_proj`, `v_proj`, `out_proj`, `fc1`, `fc2`;
+- BF16, batch `1`, gradient accumulation `8`;
+- learning rate `5e-6`, seed `20260824`;
+- 12 000 семплов на эпоху, 3 эпохи.
+
+| Epoch | Train loss | Dev loss |
+|---:|---:|---:|
+| 1 | 0.14927 | 0.17262 |
+| 2 | 0.10672 | 0.16973 |
+| 3 | 0.09732 | **0.16620** |
+
+Выбран epoch 3. Он немного уступал epoch 2 по raw WER, но лучше сохранял целые coding-задания, критические термины и пунктуацию. Оптимизировался полезный результат, а не одна агрегированная цифра.
+
+### 5. Постобработка и честный gate
+
+Детерминированный spoken formatter снизил WER 8.35% → 6.29% и поднял punctuation macro-F1 0.4172 → 0.6468. Генеративный RuPunct был отклонён: на coding test он снизил macro-F1 0.4172 → 0.3979.
+
+Следующий цикл специально усиливал multi-voice hard-set. Лучший кандидат улучшил hard-set WER 60.31% → 31.68%, но ухудшил главный domain gate. Два адаптера и три интерполяции были отклонены. В релиз пошёл прежний R48 epoch 3, а не кандидат с красивой локальной метрикой.
+
+### 6. Сборка для Handy
+
+Выбранный LoRA был слит с базовой моделью в FP16, конвертирован в формат `whisper.cpp` и квантован в `Q8_0`. Q8_0 выбран вместо более агрессивного Q5_0 по требованию минимизировать потерю качества. Отдельный parity test показал нулевую разницу WER на 40 клипах.
+
+## Спецификация артефакта
+
+| Поле | Значение |
+|---|---|
+| Файл | `handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin` |
+| Формат | `whisper.cpp` GGML |
+| Квантование | `Q8_0` |
+| Размер | 874 188 075 байт / 833.69 MiB |
+| Язык | русский с coding code-switch |
+| Базовая модель | `coriollon/whisper-large-v3-turbo-russian` |
+| SHA-256 | `BCEB46FC11068BA5BAD0ED85AFDCC92E5639704D04F5238C2D43DB20DDF90A96` |
+
+## Ограничения
+
+- Целевой режим: русские инструкции coding-агентам. Английская речь и универсальная транскрибация не оптимизировались.
+- `critical exact` 60.42% означает, что сложные идентификаторы и команды всё ещё распознаются не идеально.
+- Точка с запятой оставалась слабым знаком; двоеточие распознавалось хуже точки, запятой и вопросительного знака.
+- На Common Voice, Speech-MASSIVE и RuLibriSpeech есть небольшая регрессия относительно base.
+- Личный голос и конкретный микрофон владельца не использовались для персональной калибровки.
+- Q8_0 parity test содержит только 40 клипов и не заменяет широкую проверку на вашей речи.
+
+## Данные и условия использования
+
+Базовая модель опубликована под Apache-2.0. Источники обучения имеют разные и зависящие от источника условия: CC0, CC BY 3.0/4.0, public-domain claims с юрисдикционными оговорками и синтетический Microsoft Edge TTS replay на раннем этапе. Поэтому этот репозиторий не присваивает весам упрощённую единую лицензию.
+
+Релиз не содержит training audio, evaluation audio, manifests, локальные пути, credentials или запись личного голоса. Перед коммерческим или регулируемым использованием проверьте условия базовой модели, каждого исходного набора и применимые Microsoft Product Terms.
+
+Источники: [YO-CPT-ru](https://huggingface.co/datasets/NCSpeech/YO-CPT-ru), [Common Voice 21 RU](https://huggingface.co/datasets/Sh1man/common_voice_21_ru), [RuLibriSpeech](https://huggingface.co/datasets/bond005/rulibrispeech), [FLEURS](https://huggingface.co/datasets/google/fleurs).
+
+## Воспроизводимость
+
+Полные агрегированные результаты и параметры обучения: [`evaluation.json`](./evaluation.json).
+
+```powershell
+$expected = "BCEB46FC11068BA5BAD0ED85AFDCC92E5639704D04F5238C2D43DB20DDF90A96"
+$actual = (Get-FileHash -Algorithm SHA256 .\handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin).Hash
+$actual -eq $expected
+```
+
+Ожидаемый результат: `True`.

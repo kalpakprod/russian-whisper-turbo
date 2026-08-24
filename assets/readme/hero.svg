@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Handy Whisper RU Coding Agent Q8_0</title>
+  <desc id="desc">Локальная русская модель диктовки coding-задач для Handy: голос превращается в точные CLI-команды, пути и идентификаторы.</desc>
+  <defs>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#79E0C3"/>
+      <stop offset="1" stop-color="#7CA7FF"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#1A2230" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="420" rx="30" fill="#070A0F"/>
+  <rect x="1" y="1" width="1198" height="418" rx="29" fill="none" stroke="#202938" stroke-width="2"/>
+  <rect x="744" y="24" width="432" height="372" rx="22" fill="url(#grid)" opacity="0.75"/>
+
+  <g id="title-block" transform="translate(58 50)">
+    <text x="0" y="0" fill="#79E0C3" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700" letter-spacing="2">WHISPER LARGE V3 TURBO · RU · CODING DICTATION</text>
+    <text x="0" y="76" fill="#F4F7FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="62" font-weight="750">Handy Whisper</text>
+    <text x="0" y="137" fill="#F4F7FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="62" font-weight="750">RU Coding Agent</text>
+    <text x="0" y="184" fill="#A8B3C4" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="23">Локальная Q8_0-модель для русских задач coding-агентам.</text>
+    <text x="0" y="218" fill="#A8B3C4" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="23">Сохраняет команды, пути, флаги, идентификаторы и отрицания.</text>
+
+    <g transform="translate(0 260)">
+      <rect width="196" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
+      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">MODEL-ONLY WER ↓</text>
+      <text x="18" y="57" fill="#79E0C3" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">45.51 → 8.35%</text>
+    </g>
+    <g transform="translate(210 260)">
+      <rect width="196" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
+      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">CRITICAL EXACT ↑</text>
+      <text x="18" y="57" fill="#7CA7FF" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">2.78 → 60.42%</text>
+    </g>
+    <g transform="translate(420 260)">
+      <rect width="252" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
+      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">HANDY ARTIFACT</text>
+      <text x="18" y="57" fill="#F4F7FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">Q8_0 · 833.69 MiB</text>
+    </g>
+  </g>
+
+  <g id="voice-to-code" transform="translate(772 54)">
+    <text x="0" y="0" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" letter-spacing="1.5">VOICE → CODE</text>
+
+    <g transform="translate(0 38)">
+      <rect width="376" height="92" rx="18" fill="#0E141D" stroke="#263244"/>
+      <path d="M24 49 L40 49 L50 28 L63 70 L77 39 L91 58 L105 25 L119 72 L133 42 L147 55 L161 34 L175 64 L189 31 L203 68 L217 44 L231 53 L245 37 L259 61 L273 42 L287 54 L301 48 L352 48" fill="none" stroke="url(#signal)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="352" cy="48" r="6" fill="#7CA7FF"/>
+    </g>
+
+    <path d="M188 142V169" stroke="#3A475D" stroke-width="2"/>
+    <path d="M180 161L188 169L196 161" fill="none" stroke="#3A475D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(0 180)" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="19">
+      <rect width="178" height="52" rx="14" fill="#10211E" stroke="#2A6658"/>
+      <text x="18" y="33" fill="#79E0C3">pytest -q</text>
+
+      <rect x="192" width="184" height="52" rx="14" fill="#111B2A" stroke="#345078"/>
+      <text x="210" y="33" fill="#9BBEFF">src/api.py</text>
+
+      <rect y="66" width="178" height="52" rx="14" fill="#111B2A" stroke="#345078"/>
+      <text x="18" y="99" fill="#9BBEFF">--dry-run</text>
+
+      <rect x="192" y="66" width="184" height="52" rx="14" fill="#10211E" stroke="#2A6658"/>
+      <text x="210" y="99" fill="#79E0C3">TypeScript</text>
+    </g>
+
+    <text x="0" y="326" fill="#667389" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">R48 benchmark · metrics before Q8_0 conversion</text>
+  </g>
+</svg>
