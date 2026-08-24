@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/readme/hero.svg" width="100%" alt="Handy Whisper RU Coding Agent: локальная Q8_0-модель для русской диктовки coding-задач">
+  <img src="./assets/readme/hero.svg" width="100%" alt="Russian Whisper Turbo: локальная Q8_0-модель для русской диктовки coding-задач">
 </p>
 
 <p align="center">
@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/kalpakprod/handy-whisper-large-v3-turbo-ru-coding-agent/releases/latest/download/handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin"><strong>Скачать модель</strong></a>
+  <a href="https://github.com/kalpakprod/russian-whisper-turbo/releases/latest/download/handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin"><strong>Скачать модель</strong></a>
   ·
   <a href="#установка-в-handy">Установить в Handy</a>
   ·
@@ -39,7 +39,7 @@
 $modelDir = Join-Path $env:APPDATA "com.pais.handy\models"
 $modelName = "handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin"
 $modelPath = Join-Path $modelDir $modelName
-$url = "https://github.com/kalpakprod/handy-whisper-large-v3-turbo-ru-coding-agent/releases/latest/download/$modelName"
+$url = "https://github.com/kalpakprod/russian-whisper-turbo/releases/latest/download/$modelName"
 
 New-Item -ItemType Directory -Force -Path $modelDir | Out-Null
 Invoke-WebRequest -Uri $url -OutFile $modelPath
@@ -56,7 +56,7 @@ BCEB46FC11068BA5BAD0ED85AFDCC92E5639704D04F5238C2D43DB20DDF90A96
 
 ### Вручную
 
-1. Скачайте `.bin` из [последнего релиза](https://github.com/kalpakprod/handy-whisper-large-v3-turbo-ru-coding-agent/releases/latest).
+1. Скачайте `.bin` из [последнего релиза](https://github.com/kalpakprod/russian-whisper-turbo/releases/latest).
 2. Положите файл в `%APPDATA%\com.pais.handy\models\`.
 3. Перезапустите Handy и выберите модель по имени файла.
 
