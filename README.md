@@ -97,6 +97,35 @@ BCEB46FC11068BA5BAD0ED85AFDCC92E5639704D04F5238C2D43DB20DDF90A96
 
 Модель специализирована под coding-диктовку. Она не заявлена как безусловно лучший универсальный русский ASR.
 
+### Сравнение с Whisper-Podlodka-Turbo
+
+25 августа 2026 года исходный checkpoint [`bond005/whisper-podlodka-turbo`](https://huggingface.co/bond005/whisper-podlodka-turbo) был проверен тем же evaluator, на тех же аудиофайлах и с тем же `beam=3`. Личный голос владельца не использовался. Сравнение ниже относится к исходному Hugging Face checkpoint Podlodka и выбранному R48 до конвертации в Q8_0.
+
+На главном тесте из 300 русских coding-команд:
+
+| Модель | WER ↓ | Word exact ↑ | Surface exact ↑ | Critical exact ↑ | Negation exact ↑ | False canonicalization ↓ | Punctuation macro-F1 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Russian Whisper Turbo R48 | **8.35%** | **65.33%** | **53.33%** | **60.42%** | **100%** | **0%** | **0.4172** |
+| Whisper-Podlodka-Turbo | 39.80% | 15.67% | 7.00% | 18.75% | **100%** | **0%** | 0.0794 |
+
+У Russian Whisper Turbo на этом наборе примерно на **79% ниже WER**, а точные пути, CLI-команды и идентификаторы сохраняются примерно в **3.2 раза чаще**.
+
+С одинаковым внешним spoken formatter:
+
+| Модель | WER ↓ | Word exact ↑ | Surface exact ↑ | Critical exact ↑ | Punctuation macro-F1 ↑ |
+|---|---:|---:|---:|---:|---:|
+| Russian Whisper Turbo R48 + formatter | **6.29%** | **67.67%** | **53.33%** | **60.42%** | **0.6468** |
+| Whisper-Podlodka-Turbo + formatter | 24.77% | 25.67% | 8.33% | 18.75% | 0.3255 |
+
+На обычной русской речи FLEURS модели практически равны:
+
+| Модель | WER ↓ | Word exact ↑ | Surface exact ↑ | Punctuation macro-F1 ↑ |
+|---|---:|---:|---:|---:|
+| Russian Whisper Turbo R48 | 5.91% | **47.68%** | **27.00%** | **0.4834** |
+| Whisper-Podlodka-Turbo | **5.88%** | 46.41% | 26.16% | 0.4737 |
+
+Разница FLEURS WER составляет всего `0.02` процентного пункта. Поэтому вывод ограничен назначением моделей: Podlodka позиционируется как универсальная русско-английская ASR с упором на шум, длинную речь и подавление галлюцинаций; Russian Whisper Turbo оптимизирована именно для русской диктовки coding-агентам. Этот тест не сравнивал шумоустойчивость, длинные записи, перевод и определение языка.
+
 ## История дообучения
 
 ### 1. Базовая русская Whisper
