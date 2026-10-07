@@ -1,129 +1,56 @@
 {
+  "release": "v2.0.0",
+  "status": "published_candidate_pending_release_upload",
   "artifact": {
     "filename": "handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin",
     "format": "whisper.cpp GGML",
     "quantization": "Q8_0",
     "bytes": 874188075,
-    "size_mib": 833.69,
-    "sha256": "BCEB46FC11068BA5BAD0ED85AFDCC92E5639704D04F5238C2D43DB20DDF90A96",
+    "sha256": "eb05b341f8d47a16e554464175529951ba5b94937d6afc8d63e26041ea326ce5",
+    "base_model": "openai/whisper-large-v3-turbo",
     "personal_voice_used": false,
-    "direct_q8_vs_f16_metrics": {
-      "count": 40,
-      "domain_count": 20,
-      "hard_count": 20,
-      "q8_vs_f16_wer": 0.07878787878787878,
-      "normalized_exact_rate": 0.675,
-      "surface_exact_rate": 0.65,
-      "f16_wer": 0.3333333333333333,
-      "q8_0_wer": 0.3333333333333333,
-      "wer_delta_q8_minus_f16": 0.0,
-      "f16_punctuation_macro_f1": 0.532947980660399,
-      "q8_0_punctuation_macro_f1": 0.5329240048509826
-    },
-    "benchmark_scope_note": "The full benchmark results below describe the selected R48 adapter before conversion. A separate 40-clip parity check compared the merged F16 and Q8_0 whisper.cpp artifacts on 20 domain and 20 hard-set clips."
-  },
-  "selected": {
-    "base_model": "coriollon/whisper-large-v3-turbo-russian",
-    "adapter": "lora-public-v2-r48/best",
-    "epoch": 3,
-    "adapter_sha256": "5FF8EDB6F21ACAFF5A84415BE0DD26D4C5686D917123330EB6A09AE8671AE5E5",
-    "personal_voice_used": false
-  },
-  "domain_test": {
-    "count": 300,
-    "hours": 0.421,
-    "base": {
-      "wer": 0.4551,
-      "critical_exact_rate": 0.0278,
-      "negation_exact_rate": 1.0,
-      "false_canonicalization_rate": 0.0,
-      "punctuation_macro_f1": 0.0471
-    },
-    "previous_r32": {
-      "wer": 0.3356,
-      "critical_exact_rate": 0.5972,
-      "negation_exact_rate": 1.0,
-      "false_canonicalization_rate": 0.0,
-      "punctuation_macro_f1": 0.0698
-    },
-    "selected_r48_raw": {
-      "wer": 0.08353336533845415,
-      "word_exact_rate": 0.6533333333333333,
-      "surface_exact_rate": 0.5333333333333333,
-      "critical_exact_rate": 0.6041666666666666,
-      "negation_exact_rate": 1.0,
-      "false_canonicalization_rate": 0.0,
-      "punctuation_macro_f1": 0.417217
-    },
-    "selected_r48_formatted": {
-      "wer": 0.0628900624099856,
-      "word_exact_rate": 0.6766666666666666,
-      "surface_exact_rate": 0.5333333333333333,
-      "critical_exact_rate": 0.6041666666666666,
-      "negation_exact_rate": 1.0,
-      "false_canonicalization_rate": 0.0,
-      "format_command_exact_rate": 0.515,
-      "punctuation_macro_f1": 0.6467976335152864
-    }
-  },
-  "external_wer": {
-    "fleurs_ru_237": {
-      "base": 0.0787,
-      "selected_r48": 0.0590577
-    },
-    "common_voice_ru_687": {
-      "base": 0.0373,
-      "selected_r48": 0.0402894
-    },
-    "speech_massive_ru_1810": {
-      "base": 0.1722,
-      "selected_r48": 0.17925785
-    },
-    "rulibrispeech_380": {
-      "base": 0.1179,
-      "selected_r48": 0.126984
-    }
-  },
-  "hardset_arbitration": {
-    "count": 200,
-    "hours": 0.292,
-    "personal_voice_used": false,
-    "selected_adapter_formatted": {
-      "wer": 0.6030581,
-      "critical_exact_rate": 0.09,
-      "punctuation_macro_f1": 0.2766257
-    },
-    "best_rejected_candidate_formatted": {
-      "wer": 0.3168196,
-      "critical_exact_rate": 0.38,
-      "punctuation_macro_f1": 0.38656,
-      "rejection_reason": "Regressed the primary domain formatted WER and punctuation gate."
-    }
+    "source": "steammachine:~/asr/tune-turbo-v6/r48-bc250-q8_0.bin"
   },
   "training": {
-    "method": "LoRA",
-    "rank": 48,
-    "alpha": 96,
-    "dropout": 0.05,
-    "target_modules": [
-      "q_proj",
-      "k_proj",
-      "v_proj",
-      "out_proj",
-      "fc1",
-      "fc2"
-    ],
-    "precision": "BF16",
-    "batch_size": 1,
-    "gradient_accumulation": 8,
-    "learning_rate": 0.000005,
-    "seed": 20260824,
-    "samples_per_epoch": 12000,
+    "method": "decoder-only LoRA",
+    "rank": 32,
+    "learning_rate": 0.0001,
+    "precision": "fp32",
     "epochs": 3,
-    "selected_epoch": 3,
-    "train_examples": 11346,
-    "train_hours": 22.754,
-    "dev_examples": 926,
-    "dev_hours": 1.852
+    "gold_training_phrases": 112,
+    "gold_repeat": 10,
+    "human_replay_clips": 264,
+    "owner_live_dictations_used": 0,
+    "owner_live_dictations_available_but_unverified": 2265,
+    "selection_note": "v6 is the best measured reference; a later deployment-matched epoch-2 retrain did not significantly improve it and was not selected"
+  },
+  "app_matched_regression": {
+    "decoder": "whisper.cpp Vulkan build-vk",
+    "flags": "ru, timestamps, -bs 1 -bo 2 -et 2.8 -lpt -1.25 -ml 4096, application dictionary",
+    "candidate_epoch": 2,
+    "studio": {"n": 106, "v6_wer": 14.04, "candidate_wer": 15.06, "difference_candidate_minus_v6": 1.02, "ci95": [-1.09, 3.20]},
+    "podlodka": {"n": 20, "v6_wer": 9.71, "candidate_wer": 10.24, "difference_candidate_minus_v6": 0.52, "ci95": [-0.58, 1.52]},
+    "decision": "v6 remains selected by the tie rule; candidate not installed"
+  },
+  "v6_results": {
+    "studio": {"n": 106, "wer": 14.04, "term_accuracy": 73.39, "runaway": 0},
+    "podlodka": {"n": 20, "wer": 9.71, "term_accuracy": 52.63, "runaway": 0},
+    "general_vs_untuned_wer_loss_pp": {
+      "podlodka": 0.44,
+      "fleurs_ru": 0.48,
+      "fleurs_en": 0.21,
+      "common_voice_ru": -1.13
+    },
+    "limitations": [
+      "studio and Podlodka are controlled regression exams, not owner live-dictation proof",
+      "existing FLEURS manifests contain duplicate IDs: 192 unique Russian and 164 unique English keys were evaluated",
+      "the candidate was not accepted as an improvement over v6"
+    ]
+  },
+  "legacy_v1": {
+    "tag": "v1.0.0",
+    "base_model": "coriollon/whisper-large-v3-turbo-russian",
+    "sha256": "bceb46fc11068ba5bad0ed85afdcc92e5639704d04f5238c2d43db20ddf90a96",
+    "note": "preserved as Legacy; its original evaluation remains in the v1.0.0 tag"
   }
 }
