@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-  <title id="title">Russian Whisper Turbo Q8_0</title>
-  <desc id="desc">Локальная русская модель диктовки coding-задач для Handy: голос превращается в точные CLI-команды, пути и идентификаторы.</desc>
+  <title id="title">Russian Whisper Turbo v6 · релиз 2.0</title>
+  <desc id="desc">Локальная русская модель диктовки coding-задач для Handy, Turbo v6: голос превращается в точные CLI-команды, пути и идентификаторы. Студия, 106 фраз: WER 14.04%, термины 73.39%. Podlodka, 20 фрагментов: WER 9.71%.</desc>
   <defs>
     <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#79E0C3"/>
@@ -20,27 +20,28 @@
     <text x="0" y="76" fill="#F4F7FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="62" font-weight="750">Russian Whisper</text>
     <text x="0" y="137" fill="#F4F7FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="62" font-weight="750">Turbo</text>
     <text x="0" y="184" fill="#A8B3C4" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="23">Локальная Q8_0-модель для русских задач coding-агентам.</text>
-    <text x="0" y="218" fill="#A8B3C4" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="23">Сохраняет команды, пути, флаги, идентификаторы и отрицания.</text>
+    <text x="0" y="218" fill="#A8B3C4" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="23">Диктовка команд, путей, флагов и технических терминов.</text>
+    <text x="0" y="252" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18">RELEASE 2.0 · TURBO V6 · Q8_0 · 833.69 MIB · N=106/20</text>
 
-    <g transform="translate(0 260)">
-      <rect width="196" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
-      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">MODEL-ONLY WER ↓</text>
-      <text x="18" y="57" fill="#79E0C3" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">45.51 → 8.35%</text>
+    <g transform="translate(0 268)">
+      <rect width="210" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
+      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18">STUDIO WER ↓</text>
+      <text x="18" y="57" fill="#79E0C3" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">14.04%</text>
     </g>
-    <g transform="translate(210 260)">
-      <rect width="196" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
-      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">CRITICAL EXACT ↑</text>
-      <text x="18" y="57" fill="#7CA7FF" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">2.78 → 60.42%</text>
+    <g transform="translate(224 268)">
+      <rect width="210" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
+      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18">TERM ACCURACY ↑</text>
+      <text x="18" y="57" fill="#7CA7FF" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">73.39%</text>
     </g>
-    <g transform="translate(420 260)">
-      <rect width="252" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
-      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">HANDY ARTIFACT</text>
-      <text x="18" y="57" fill="#F4F7FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">Q8_0 · 833.69 MiB</text>
+    <g transform="translate(448 268)">
+      <rect width="210" height="74" rx="16" fill="#0E141D" stroke="#263244"/>
+      <text x="18" y="27" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18">PODLODKA WER ↓</text>
+      <text x="18" y="57" fill="#79E0C3" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="29" font-weight="750">9.71%</text>
     </g>
   </g>
 
   <g id="voice-to-code" transform="translate(772 54)">
-    <text x="0" y="0" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" letter-spacing="1.5">VOICE → CODE</text>
+    <text x="0" y="0" fill="#8290A5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="1.5">VOICE → CODE</text>
 
     <g transform="translate(0 38)">
       <rect width="376" height="92" rx="18" fill="#0E141D" stroke="#263244"/>
@@ -65,6 +66,6 @@
       <text x="210" y="99" fill="#79E0C3">TypeScript</text>
     </g>
 
-    <text x="0" y="326" fill="#667389" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16">R48 benchmark · metrics before Q8_0 conversion</text>
+    <text x="0" y="326" fill="#667389" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18">TURBO V6 · APP-MATCHED EXAM</text>
   </g>
 </svg>
