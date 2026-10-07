@@ -1,0 +1,194 @@
+{
+  "dataset": {
+    "public_archive_records": 1352,
+    "public_eligible": 1350,
+    "public_selected": 200,
+    "public_audio_s": 1401.26,
+    "public_exclusions": {
+      "duration": 2
+    },
+    "private_selected": 150,
+    "private_sources": {
+      "owner-live": 90,
+      "channel": 60
+    },
+    "private_training_audio_excluded": 0,
+    "private_audio_s": 3245.5,
+    "training_fingerprints": 5797,
+    "seed": 365,
+    "smoke_n": 20,
+    "notes": [
+      "Public book-text alignment not independently audited",
+      "No owner WER gold; private sample mixes90owner+60channel,not150owner recordings",
+      "Latin-presence strata unavailable in saved pool metadata; source and duration strata used",
+      "Legacy source train manifests unavailable; its historical/pretraining/test exposure not fully provable"
+    ]
+  },
+  "models": {
+    "v6": {
+      "public": {
+        "n": 200,
+        "word_errors": 334,
+        "reference_words": 2757,
+        "wer_pct": 12.11461733768589,
+        "term_hits": 0,
+        "reference_terms_including_numbers": 0,
+        "term_accuracy_pct": null,
+        "runaway": 0,
+        "wall_s": 123.6,
+        "audio_s": 1401.3,
+        "rtfx": 11.3
+      },
+      "stability": {
+        "n": 150,
+        "empty": 0,
+        "repeat_runaway_4gram3plus": 0,
+        "words": 7102,
+        "words_per_audio_s": 2.194142362827484,
+        "latin_tokens": 421,
+        "latin_token_share_pct": 5.9279076316530555,
+        "wall_s": 155.3,
+        "audio_s": 3236.8,
+        "rtfx": 20.8
+      }
+    },
+    "legacy": {
+      "public": {
+        "n": 200,
+        "word_errors": 271,
+        "reference_words": 2757,
+        "wer_pct": 9.829524845846935,
+        "term_hits": 0,
+        "reference_terms_including_numbers": 0,
+        "term_accuracy_pct": null,
+        "runaway": 0,
+        "wall_s": 123.5,
+        "audio_s": 1401.3,
+        "rtfx": 11.3
+      },
+      "stability": {
+        "n": 150,
+        "empty": 0,
+        "repeat_runaway_4gram3plus": 0,
+        "words": 7054,
+        "words_per_audio_s": 2.1793129016312407,
+        "latin_tokens": 370,
+        "latin_token_share_pct": 5.245250921463,
+        "wall_s": 155.5,
+        "audio_s": 3236.8,
+        "rtfx": 20.8
+      }
+    }
+  },
+  "public_paired": {
+    "wer": {
+      "v6_minus_legacy_pp": 2.285092491838956,
+      "ci95_pp": [
+        1.203912716328066,
+        3.389212827988338
+      ],
+      "n": 200,
+      "resamples": 3000,
+      "seed": 2
+    },
+    "terms": null
+  },
+  "cleanup": {
+    "v6": {
+      "rules": {
+        "n": 150,
+        "input_words": 7102,
+        "removed_or_replaced_words": 91,
+        "removed_or_replaced_input_pct": 1.2813292030413967,
+        "empty": 0,
+        "more_than_half_words_changed_clips": 0,
+        "latin_kept": 417,
+        "latin_total": 419,
+        "latin_retention_pct": 99.52267303102626,
+        "profanity_kept": 115,
+        "profanity_total": 115,
+        "profanity_retention_pct": 100.0,
+        "adjacent_repeats_kept": 14,
+        "adjacent_repeats_total": 17,
+        "adjacent_repeat_retention_pct": 82.3529411764706,
+        "note": "Lexical proxies; legitimate filler/self-correction deletion may count. No clean reference, no meaning-loss or quality claim.",
+        "latency_median_s": 0.0002941050042863935,
+        "latency_p95_s": 0.0008094279910437763,
+        "latency_sum_s": 0.055449759849580005
+      },
+      "qwen": {
+        "n": 150,
+        "input_words": 7102,
+        "removed_or_replaced_words": 229,
+        "removed_or_replaced_input_pct": 3.224443818642636,
+        "empty": 0,
+        "more_than_half_words_changed_clips": 2,
+        "latin_kept": 385,
+        "latin_total": 419,
+        "latin_retention_pct": 91.8854415274463,
+        "profanity_kept": 100,
+        "profanity_total": 115,
+        "profanity_retention_pct": 86.95652173913044,
+        "adjacent_repeats_kept": 16,
+        "adjacent_repeats_total": 17,
+        "adjacent_repeat_retention_pct": 94.11764705882354,
+        "note": "Lexical proxies; legitimate filler/self-correction deletion may count. No clean reference, no meaning-loss or quality claim.",
+        "latency_median_s": 0.6006315720005659,
+        "latency_p95_s": 1.3085897479904816,
+        "latency_sum_s": 102.78129518288188
+      },
+      "qwen_errors": 0
+    },
+    "legacy": {
+      "rules": {
+        "n": 150,
+        "input_words": 7054,
+        "removed_or_replaced_words": 77,
+        "removed_or_replaced_input_pct": 1.0915792458179756,
+        "empty": 0,
+        "more_than_half_words_changed_clips": 1,
+        "latin_kept": 364,
+        "latin_total": 368,
+        "latin_retention_pct": 98.91304347826087,
+        "profanity_kept": 117,
+        "profanity_total": 117,
+        "profanity_retention_pct": 100.0,
+        "adjacent_repeats_kept": 16,
+        "adjacent_repeats_total": 16,
+        "adjacent_repeat_retention_pct": 100.0,
+        "note": "Lexical proxies; legitimate filler/self-correction deletion may count. No clean reference, no meaning-loss or quality claim.",
+        "latency_median_s": 0.00030345898994710296,
+        "latency_p95_s": 0.0007032489811535925,
+        "latency_sum_s": 0.051775408966932446
+      },
+      "qwen": {
+        "n": 150,
+        "input_words": 7054,
+        "removed_or_replaced_words": 199,
+        "removed_or_replaced_input_pct": 2.8210944145165864,
+        "empty": 1,
+        "more_than_half_words_changed_clips": 2,
+        "latin_kept": 355,
+        "latin_total": 368,
+        "latin_retention_pct": 96.46739130434783,
+        "profanity_kept": 94,
+        "profanity_total": 117,
+        "profanity_retention_pct": 80.34188034188034,
+        "adjacent_repeats_kept": 13,
+        "adjacent_repeats_total": 16,
+        "adjacent_repeat_retention_pct": 81.25,
+        "note": "Lexical proxies; legitimate filler/self-correction deletion may count. No clean reference, no meaning-loss or quality claim.",
+        "latency_median_s": 0.5925063884933479,
+        "latency_p95_s": 1.3285209299938288,
+        "latency_sum_s": 103.07796093806974
+      },
+      "qwen_errors": 0
+    }
+  },
+  "scope": "Public quality vs source book text; private stability and lexical preservation only, not WER/semantic correctness",
+  "stability_pair": {
+    "n": 150,
+    "different_normalized_outputs": 138,
+    "note": "Differences are not correctness without gold"
+  }
+}

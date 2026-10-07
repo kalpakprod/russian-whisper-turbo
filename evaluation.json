@@ -48,6 +48,25 @@
       "WER and term accuracy in this document use percentage points (14.04 means14.04%), unlike the legacy v1 fractions"
     ]
   },
+  "new_benchmark_2026_10_08": {
+    "report": "release-v2/BENCHMARKS-2026-10-08.md",
+    "metrics": "release-v2/benchmark-2026-10-08.json",
+    "public_source": "Sh1man/rulibrispeech:test",
+    "public_n": 200,
+    "known_training_fingerprints_checked": 5797,
+    "v6_wer_pct": 12.11461733768589,
+    "legacy_wer_pct": 9.829524845846935,
+    "v6_minus_legacy_pp": 2.285092491838956,
+    "ci95_pp": [1.203912716328066, 3.389212827988338],
+    "bootstrap_resamples": 3000,
+    "bootstrap_seed": 2,
+    "public_rtfx_both": 11.3,
+    "conclusion": "Legacy R48 is better on this book-speech test; v6 is not a universally better Russian ASR",
+    "private_stability": {"n": 150, "owner_live": 90, "channel": 60, "wer_gold_available": false, "empty_both": 0, "repeat_runaway_both": 0, "rtfx_both": 20.8},
+    "gpu_wall_s": 824,
+    "gpu_ceiling_s": 1200,
+    "limitations": ["Book-text alignment not independently audited", "Legacy full historical training/exam exposure unknown", "Private and cleanup proxy results do not measure semantic correctness"]
+  },
   "legacy_v1": {
     "tag": "v1.0.0",
     "base_model": "coriollon/whisper-large-v3-turbo-russian",
