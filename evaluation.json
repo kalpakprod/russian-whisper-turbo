@@ -1,6 +1,6 @@
 {
   "release": "v2.0.0",
-  "status": "published_candidate_pending_release_upload",
+  "status": "published",
   "artifact": {
     "filename": "handy-whisper-large-v3-turbo-ru-coding-agent-q8_0.bin",
     "format": "whisper.cpp GGML",
@@ -8,8 +8,8 @@
     "bytes": 874188075,
     "sha256": "eb05b341f8d47a16e554464175529951ba5b94937d6afc8d63e26041ea326ce5",
     "base_model": "openai/whisper-large-v3-turbo",
-    "personal_voice_used": false,
-    "source": "steammachine:~/asr/tune-turbo-v6/r48-bc250-q8_0.bin"
+    "personal_voice_used": true,
+    "benchmark_scope": "Scripted studio speech of the training speaker and human-labelled podcast fragments; owner live-dictation quality has not been independently verified"
   },
   "training": {
     "method": "decoder-only LoRA",
@@ -36,15 +36,16 @@
     "studio": {"n": 106, "wer": 14.04, "term_accuracy": 73.39, "runaway": 0},
     "podlodka": {"n": 20, "wer": 9.71, "term_accuracy": 52.63, "runaway": 0},
     "general_vs_untuned_wer_loss_pp": {
-      "podlodka": 0.44,
-      "fleurs_ru": 0.48,
-      "fleurs_en": 0.21,
-      "common_voice_ru": -1.13
+      "podlodka": -1.4,
+      "fleurs_ru": 0.13,
+      "fleurs_en": -0.02,
+      "common_voice_ru": -1.26
     },
     "limitations": [
       "studio and Podlodka are controlled regression exams, not owner live-dictation proof",
       "existing FLEURS manifests contain duplicate IDs: 192 unique Russian and 164 unique English keys were evaluated",
-      "the candidate was not accepted as an improvement over v6"
+      "a separate epoch-2 candidate was not accepted as an improvement over v6; its metrics must not be attributed to v6",
+      "WER and term accuracy in this document use percentage points (14.04 means14.04%), unlike the legacy v1 fractions"
     ]
   },
   "legacy_v1": {
