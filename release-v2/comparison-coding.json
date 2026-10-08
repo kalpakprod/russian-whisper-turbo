@@ -1,0 +1,62 @@
+{
+  "dataset": "Studio coding dictation",
+  "n": 106,
+  "scope": "same-speaker coding regression, not new unseen/public-general evidence",
+  "models": {
+    "legacy": {
+      "sha256": "bceb46fc11068ba5bad0ed85afdcc92e5639704d04f5238c2d43db20ddf90a96",
+      "word_errors": 182,
+      "reference_words": 591,
+      "wer_pct": 30.795262267343485,
+      "term_hits": 78,
+      "reference_terms": 218,
+      "term_accuracy_pct": 35.77981651376147,
+      "runaway": 1,
+      "decoder_meta": {
+        "engine": "whispercpp",
+        "backend": "vulkan",
+        "lang": "ru",
+        "threads": 12
+      }
+    },
+    "v2": {
+      "sha256": "eb05b341f8d47a16e554464175529951ba5b94937d6afc8d63e26041ea326ce5",
+      "word_errors": 83,
+      "reference_words": 591,
+      "wer_pct": 14.043993231810491,
+      "term_hits": 160,
+      "reference_terms": 218,
+      "term_accuracy_pct": 73.39449541284404,
+      "runaway": 0,
+      "decoder_meta": {
+        "engine": "whispercpp",
+        "backend": "vulkan",
+        "lang": "ru",
+        "threads": 12
+      }
+    }
+  },
+  "wer_comparison": {
+    "v2_minus_legacy_pp": -16.751269035532992,
+    "ci95_pp": [
+      -20.96219931271478,
+      -12.477396021699821
+    ],
+    "n": 106,
+    "bootstrap_resamples": 3000,
+    "seed": 2
+  },
+  "term_accuracy_comparison": {
+    "v2_minus_legacy_pp": 37.61467889908257,
+    "ci95_pp": [
+      28.5024154589372,
+      46.63461538461539
+    ],
+    "n": 106,
+    "bootstrap_resamples": 3000,
+    "seed": 2
+  },
+  "relative_word_error_reduction_pct": 54.395604395604394,
+  "term_definition": "Latin terms, paths, CLI flags, identifiers and numbers; case-insensitive occurrence matching, not whole-command semantic correctness",
+  "source": "Recomputed saved r48-untuned and turbo-v6 studio hypotheses; exact published model hashes and complete 106-reference key coverage verified; no new GPU inference"
+}
